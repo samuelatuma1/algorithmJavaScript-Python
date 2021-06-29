@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            function smallestNum(arr){
+                var smallest = arr[0]
+                var index = 0
+                for(i=1; i < arr.length; i++){
+                    if(arr[i] < smallest){
+                        smallest = arr[i]
+                        index = i
+                    }
+                }
+                //document.querySelector('body').innerText = `${smallest} at index ${index}`
+                return index
+            }
+
+            //smallestNum([7,3, 4, 1, 3, 8, 9])
+
+            function selectionSort(arr){
+                let sorted_arr = []
+                for(i=0; arr.length; i++){
+                    let smallstnum = smallestNum(arr)
+                    sorted_arr.push(arr.splice(smallstnum, 1))
+                }
+                document.querySelector('body').innerText = `${sorted_arr}`
+                return sorted_arr
+            }
+
+            //selectionSort([7,3, 4, 3, 4, 8, 12, 45, 1, 3, 8, 9])
+            /*
+            sorted_arr = {name: {
+                'name': 'Samuel',
+                age: 24}
+            }
+            
+            dateOfBirth = prompt('date of birth: ')
+            ageAsAt = prompt('Year you want to check how old you will be: ')
+            age = parseInt(ageAsAt) - parseInt(dateOfBirth)
+            document.querySelector('body').innerText = `You will be ${age} years by ${ageAsAt}`*/
+            function square(x){
+                return x * x
+            }
+            quicksort = (arr) => {
+                document.querySelector('body').innerText =  arr.map((x) => {return x*3})
+            }
+            //quicksort([1, 2, 3, 4])
+
+            divisibleBy9 = (num) => {
+                dividables = [0, 9, 18, 27, 36, 45, 54, 63]
+                get = num.toString()
+                sum = 0
+                for( i of get){
+                    sum += parseInt(i) }
+                if(sum in dividables){
+                    return `${num} is dividable by 9`
+                    console.log(`${num} is dividable by 9`)
+                    }
+               
+                return `${num} is non divisible by 9`
+            }
+            //divisibleBy9(108)
+
+            // Breadth first search
+
+            graph = {}
+            graph['you'] = ['NMarv', 'Gozie', 'Sam']
+            graph['NMarv'] = ['MChrisent']
+            graph['Gozie'] = ['Ikenna']
+            graph['Ikenna'] = []
+            graph['MChrisent'] = ['you']
+            graph['Sam'] = ['Wilson', 'MChrisent']
+            graph['Wilson'] = ['John']
+            graph['John'] = ['Sam', 'MChrisent']
+
+            console.log(graph)
+
+            function breadthFirstSearch(start, graph, searchItem){
+                var level = {start: 0};
+                var parent = {start: null};
+                var i = 1;
+                var searchThrough = [start];
+
+                while(searchThrough.length > 0){
+                    next = []
+                    for(item of searchThrough){
+                        for(itemChild of graph[item]){
+                            if(!(level.hasOwnProperty(itemChild))){
+                                level[itemChild] = i
+                                parent[itemChild] = item
+                                next.push(itemChild)
+
+                                if(itemChild === searchItem){
+                                    console.log({
+                                        name: searchItem,
+                                        levelOfSearch: level[itemChild],
+                                        parent: parent[itemChild]
+                                    })
+
+                                    document.querySelector('body').innerHTML = JSON.stringify({
+                                        name: searchItem,
+                                        levelOfSearch: level[itemChild],
+                                        parent: parent[itemChild]
+                                    })
+                                    
+                                    return true
+
+                                }
+                            }
+                        }
+                        
+
+                    }
+                    i++
+                    searchThrough = next
+                }
+
+                return true
+            }
+           breadthFirstSearch('you', graph, 'Wilson')
+
+        })
+    </script>
+
+    
+    
+</body>
+</html>
